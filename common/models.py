@@ -5,8 +5,8 @@ from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
+
 class User(AbstractUser):
-    INVALID_CODE = "######"
 
     full_name = models.CharField(_("full name"), max_length=256)
 
