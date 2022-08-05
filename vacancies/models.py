@@ -6,6 +6,9 @@ from helpers.models import BaseModel
 class Company(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="company", null=True, blank=True
+    )
 
     class Meta:
         db_table = "company"
@@ -32,6 +35,8 @@ class Category(BaseModel):
 class Worker(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
+    min_salary = models.IntegerField(default=0, null=True, blank=True)
+    max_salary = models.IntegerField(default=0, null=True, blank=True)
 
     class Meta:
         db_table = "worker"
@@ -45,7 +50,6 @@ class Worker(BaseModel):
 class Vacancy(BaseModel):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    salary = models.IntegerField()
 
     company = models.ForeignKey(
         Company, on_delete=models.CASCADE, related_name="vacancies"
